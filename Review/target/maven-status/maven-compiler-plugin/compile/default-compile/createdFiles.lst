@@ -1,2 +1,9 @@
+com\ncu\review\Services\ReviewService.class
 com\ncu\review\controller\ReviewController.class
+com\ncu\review\irepo\IReviewRepository.class
+com\ncu\review\config\AppConfig.class
+com\ncu\review\model\Review.class
+com\ncu\review\repository\ReviewRepositoryImpl.class
 com\ncu\review\MovieManagementSystemApplication.class
+com\ncu\review\repository\ReviewRowMapper.class
+com\ncu\review\dto\ReviewDTO.class
