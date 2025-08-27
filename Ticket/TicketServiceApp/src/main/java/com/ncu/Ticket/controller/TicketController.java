@@ -1,29 +1,30 @@
 package com.ncu.Ticket.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+import com.ncu.Ticket.dto.TicketDTO;
+import com.ncu.Ticket.services.TicketService;
 
-@RequestMapping("/Ticket")
 @RestController
+@RequestMapping("/tickets")
 public class TicketController {
 
-    /*
-     * Example: http://localhost:9002/Ticket/ticket
-     */
-    @GetMapping(path = "/ticket")
-    public String getAllTickets() {
-        System.out.println("Hello from ticket controller!");
-        return "Hello from ticket controller!";
+    @Autowired
+    private TicketService ticketService;
+
+    @GetMapping
+    public List<TicketDTO> getAllTickets() {
+        return ticketService.getAllTickets();
     }
 
-    /*
-     * Example: http://localhost:9002/Ticket/ticket/Inception
-     */
-    @GetMapping(path = "/ticket/{title}")
-    public String getTicketByTitle(@PathVariable("title") String title) {
-        System.out.println("Fetching ticket: " + title);
-        return "Fetching ticket: " + title;
+    @PostMapping
+    public String addTicket(@RequestBody TicketDTO ticketDTO) {
+        ticketService.addTicket(ticketDTO);
+        return "Ticket added to DB!";
     }
 }
