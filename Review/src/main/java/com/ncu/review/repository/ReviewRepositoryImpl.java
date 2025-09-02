@@ -25,9 +25,15 @@ public class ReviewRepositoryImpl implements IReviewRepository {
     }
 
     @Override
+    public List<Review> getReviewsByMovieId(String movieId) {
+        String sql = "SELECT * FROM review WHERE movie_id = ?";
+        return jdbcTemplate.query(sql, new ReviewRowMapper(), movieId);
+    }
+
+    @Override
     public Review addReview(Review review) {
-        String sql = "INSERT INTO review (review_id, review_text, rating) VALUES (?, ?, ?)";
-        jdbcTemplate.update(sql, review.getReviewId(), review.getReviewText(), review.getRating());
+        String sql = "INSERT INTO review (review_id, movie_id, review_text, rating) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, review.getReviewId(), review.getMovieId(), review.getReviewText(), review.getRating());
         return review;
     }
 }

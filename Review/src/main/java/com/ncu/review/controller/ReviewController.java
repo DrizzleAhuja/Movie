@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import com.ncu.review.dto.ReviewDTO;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/reviews")
@@ -27,13 +28,22 @@ public class ReviewController {
         return "Review added to DB!";
     }
 
+    @GetMapping("/movie/{movieId}")
+    public List<ReviewDTO> getReviewsByMovieId(@PathVariable("movieId") String movieId) {
+        return reviewService.getReviewsByMovieId(movieId);
+    }
+
     @GetMapping("/review/{reviewId}")
-    public String getReviewById(@PathVariable("reviewId") String reviewId) {
-        return "Fetching review with ID: " + reviewId;
+    public ReviewDTO getReviewById(@PathVariable("reviewId") String reviewId) {
+        return reviewService.getReviewById(reviewId);
     }
 
     @GetMapping("/review/search/{reviewName}")
-    public String getReviewByName(@PathVariable("reviewName") String reviewName) {
-        return "Searching for review with name: " + reviewName;
+    public List<ReviewDTO> getReviewsByName(@PathVariable("reviewName") String reviewName) {
+        // You'll need to implement getReviewsByName in ReviewService
+        // For now, this is a placeholder.
+        return reviewService.getAllReviews().stream()
+                .filter(review -> review.getReviewText().toLowerCase().contains(reviewName.toLowerCase()))
+                .collect(Collectors.toList());
     }
 }

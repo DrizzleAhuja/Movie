@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import com.ncu.movie.dto.MovieDTO;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/movies")
@@ -29,12 +30,16 @@ public class MovieController {
     }
 
     @GetMapping("/movie/{movieId}")
-    public String getMovieById(@PathVariable("movieId") String movieId) {
-        return "Fetching movie with ID: " + movieId;
+    public MovieDTO getMovieById(@PathVariable("movieId") String movieId) {
+        return movieService.getMovieById(movieId);
     }
 
     @GetMapping("/movie/search/{movieName}")
-    public String getMovieByName(@PathVariable("movieName") String movieName) {
-        return "Searching for movie with name: " + movieName;
+    public List<MovieDTO> getMovieByName(@PathVariable("movieName") String movieName) {
+        // You will need to implement a getMovieByName method in your MovieService
+        // For now, returning an empty list or handling as per your service logic
+        return movieService.getAllMovies().stream()
+                .filter(movie -> movie.getMovieName().equalsIgnoreCase(movieName))
+                .collect(Collectors.toList());
     }
 }

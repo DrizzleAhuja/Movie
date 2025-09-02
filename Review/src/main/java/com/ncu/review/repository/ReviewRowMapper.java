@@ -10,6 +10,7 @@ public class ReviewRowMapper implements RowMapper<Review> {
     public Review mapRow(ResultSet rs, int rowNum) throws SQLException {
         Review review = new Review();
         review.setReviewId(rs.getString("review_id"));
+        review.setMovieId(rs.getString("movie_id")); // Added movieId mapping
         review.setReviewText(rs.getString("review_text"));
         review.setRating(rs.getInt("rating"));
         return review;

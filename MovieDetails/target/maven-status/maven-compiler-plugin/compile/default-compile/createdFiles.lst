@@ -1,0 +1,9 @@
+com\ncu\moviedetails\Services\MovieDetailsService.class
+com\ncu\moviedetails\dto\MovieDetailsDTO.class
+com\ncu\moviedetails\irepo\IMovieDetailsRepository.class
+com\ncu\moviedetails\controller\MovieDetailsController.class
+com\ncu\moviedetails\repository\MovieDetailsRepositoryImpl.class
+com\ncu\moviedetails\model\MovieDetails.class
+com\ncu\moviedetails\repository\MovieDetailsRowMapper.class
+com\ncu\moviedetails\config\AppConfig.class
+com\ncu\moviedetails\MovieDetailsApplication.class
