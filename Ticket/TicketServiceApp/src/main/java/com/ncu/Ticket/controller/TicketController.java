@@ -1,6 +1,7 @@
 package com.ncu.Ticket.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,11 @@ public class TicketController {
     @GetMapping
     public List<TicketDTO> getAllTickets() {
         return ticketService.getAllTickets();
+    }
+
+    @GetMapping("/movie/{movieId}")
+    public List<TicketDTO> getTicketsByMovieId(@PathVariable("movieId") String movieId) {
+        return ticketService.getTicketsByMovieId(movieId);
     }
 
     @PostMapping

@@ -1,1 +1,9 @@
+com\ncu\Ticket\dto\TicketDTO.class
+com\ncu\Ticket\repository\TicketRowMapper.class
 com\ncu\Ticket\TicketServiceAppApplication.class
+com\ncu\Ticket\irepo\ITicketRepository.class
+com\ncu\Ticket\controller\TicketController.class
+com\ncu\Ticket\config\AppConfig.class
+com\ncu\Ticket\model\Ticket.class
+com\ncu\Ticket\repository\TicketRepositoryImpl.class
+com\ncu\Ticket\services\TicketService.class

@@ -4,6 +4,7 @@ import com.ncu.movie.model.Movie;
 import com.ncu.movie.dto.MovieDTO;
 import com.ncu.movie.dto.ReviewDTO;
 import com.ncu.movie.dto.MovieDetailsDTO;
+import com.ncu.movie.dto.TicketDTO;
 import com.ncu.movie.irepo.IMovieRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,12 @@ public class MovieService {
 
     private final RestClient reviewRestClient;
     private final RestClient movieDetailsRestClient;
+    private final RestClient ticketRestClient;
 
     public MovieService(RestClient.Builder restClientBuilder) {
-        this.reviewRestClient = restClientBuilder.baseUrl("http://localhost:9001").build(); // Assuming Review service runs on port 9001
-        this.movieDetailsRestClient = restClientBuilder.baseUrl("http://localhost:9004").build(); // Assuming MovieDetails service runs on port 9004
+        this.reviewRestClient = restClientBuilder.baseUrl("http://REVIEWSYSTEM").build(); // Using Eureka service name
+        this.movieDetailsRestClient = restClientBuilder.baseUrl("http://MovieDetailsSystem").build(); // Using Eureka service name
+        this.ticketRestClient = restClientBuilder.baseUrl("http://TICKETSERVICE").build(); // Using Eureka service name
     }
 
     public List<MovieDTO> getAllMovies() {
@@ -36,6 +39,7 @@ public class MovieService {
                 MovieDTO movieDTO = modelMapper.map(m, MovieDTO.class);
                 movieDTO.setReviews(getReviewsByMovieId(m.getMovieId()));
                 movieDTO.setMovieDetails(getMovieDetails(m.getMovieId())); // Fetch movie details
+                movieDTO.setTickets(getTicketsByMovieId(m.getMovieId())); // Fetch tickets
                 return movieDTO;
             })
             .collect(Collectors.toList());
@@ -49,6 +53,7 @@ public class MovieService {
         MovieDTO movieDTO = modelMapper.map(movie, MovieDTO.class);
         movieDTO.setReviews(getReviewsByMovieId(movieId));
         movieDTO.setMovieDetails(getMovieDetails(movieId)); // Fetch movie details
+        movieDTO.setTickets(getTicketsByMovieId(movieId)); // Fetch tickets
         return movieDTO;
     }
 
@@ -74,6 +79,19 @@ public class MovieService {
         } catch (Exception e) {
             System.err.println("Error fetching movie details for movieId " + movieId + ": " + e.getMessage());
             return null; // Return null or a default MovieDetailsDTO on error
+        }
+    }
+
+    private List<TicketDTO> getTicketsByMovieId(String movieId) {
+        try {
+            TicketDTO[] tickets = ticketRestClient.get()
+                    .uri("/tickets/movie/{movieId}", movieId)
+                    .retrieve()
+                    .body(TicketDTO[].class);
+            return Arrays.asList(tickets);
+        } catch (Exception e) {
+            System.err.println("Error fetching tickets for movieId " + movieId + ": " + e.getMessage());
+            return List.of(); // Return empty list on error
         }
     }
 

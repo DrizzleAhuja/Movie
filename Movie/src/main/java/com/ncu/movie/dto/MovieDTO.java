@@ -3,6 +3,7 @@ package com.ncu.movie.dto;
 import java.util.List;
 import com.ncu.movie.dto.ReviewDTO;
 import com.ncu.movie.dto.MovieDetailsDTO;
+import com.ncu.movie.dto.TicketDTO;
 
 public class MovieDTO {
     private String movieId;
@@ -10,6 +11,7 @@ public class MovieDTO {
     private int rating;
     private List<ReviewDTO> reviews;
     private MovieDetailsDTO movieDetails;
+    private List<TicketDTO> tickets;
 
     public MovieDTO() {}
 
@@ -34,6 +36,15 @@ public class MovieDTO {
         this.movieDetails = movieDetails;
     }
 
+    public MovieDTO(String movieId, String movieName, int rating, List<ReviewDTO> reviews, MovieDetailsDTO movieDetails, List<TicketDTO> tickets) {
+        this.movieId = movieId;
+        this.movieName = movieName;
+        this.rating = rating;
+        this.reviews = reviews;
+        this.movieDetails = movieDetails;
+        this.tickets = tickets;
+    }
+
     public String getMovieId() { return movieId; }
     public void setMovieId(String movieId) { this.movieId = movieId; }
     public String getMovieName() { return movieName; }
@@ -55,5 +66,13 @@ public class MovieDTO {
 
     public void setMovieDetails(MovieDetailsDTO movieDetails) {
         this.movieDetails = movieDetails;
+    }
+
+    public List<TicketDTO> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<TicketDTO> tickets) {
+        this.tickets = tickets;
     }
 }

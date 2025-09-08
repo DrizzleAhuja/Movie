@@ -1,9 +1,10 @@
 package com.ncu.Ticket.irepo;
 
-import com.ncu.Ticket.dto.TicketDTO;
+import com.ncu.Ticket.model.Ticket;
 import java.util.List;
 
 public interface ITicketRepository {
-    List<TicketDTO> getAllTickets();
-    void addTicket(TicketDTO ticketDTO);
+    List<Ticket> getAllTickets();
+    List<Ticket> getTicketsByMovieId(String movieId);
+    void addTicket(Ticket ticket);
 }

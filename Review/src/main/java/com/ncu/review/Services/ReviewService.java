@@ -51,7 +51,7 @@ public class ReviewService {
         Review review = modelMapper.map(reviewDTO, Review.class);
         // Simple ID generation: "R" + System.currentTimeMillis()
         if (review.getReviewId() == null || review.getReviewId().isEmpty()) {
-            review.setReviewId("R" + System.currentTimeMillis());
+        review.setReviewId("R" + System.currentTimeMillis());
         }
         reviewRepository.addReview(review);
         return modelMapper.map(review, ReviewDTO.class);
