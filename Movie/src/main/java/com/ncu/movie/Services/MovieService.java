@@ -97,7 +97,10 @@ public class MovieService {
 
     public MovieDTO addMovie(MovieDTO movieDTO) {
         Movie movie = modelMapper.map(movieDTO, Movie.class);
-        movie.setMovieId("M" + System.currentTimeMillis());
+        // Only generate movieId if it's not provided or is empty
+        if (movie.getMovieId() == null || movie.getMovieId().isEmpty()) {
+            movie.setMovieId("M" + System.currentTimeMillis());
+        }
         movieRepository.addMovie(movie);
         return modelMapper.map(movie, MovieDTO.class);
     }

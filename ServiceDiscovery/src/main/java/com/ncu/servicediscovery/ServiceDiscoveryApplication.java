@@ -1,4 +1,4 @@
-package main.java.com.ncu.servicediscovery;
+package com.ncu.servicediscovery;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
